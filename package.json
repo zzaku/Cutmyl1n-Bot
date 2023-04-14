@@ -1,0 +1,11 @@
+{
+  "name": "cutmyl1nk",
+  "version": "1.0.0",
+  "description": "bot link shortener",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Zakuu",
+  "license": "ISC"
+}
