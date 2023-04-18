@@ -1,5 +1,7 @@
-const discord = require('discord.js');
-const bot = new discord.Client({intents: 3276799});
+const Discord = require('discord.js');
+const bot = new Discord.Client({intents: 3276799});
+const loadCommands = require('./loaders/loadCommands.js');
+const loadEvents = require('./loaders/loadEvents.js');
 require('dotenv').config();
 
 bot.commands = new Discord.Collection();
@@ -8,6 +10,7 @@ bot.function = {
     generateShortLink: require('./functions/generateShortLink.js'),
     getUserSql: require('./functions/getUserSql.js'),
     getUrlSql: require('./functions/getUrlSql.js'),
+    getRowsOfAllUrls: require('./functions/getRowsOfAllUrls.js'),
     getAllUrls: require('./functions/getAllUrls.js'),
     addUser: require('./functions/addUser.js'),
     addUrl: require('./functions/addUrl.js'),
@@ -23,14 +26,5 @@ bot.on('disconnect', (err) => {
     bot.login(process.env.BOT_TOKEN);
   });
 
-
-bot.on('ready', () => {
-    console.log(`Logged in as ${bot.user.tag}!`);
-    bot.user.setActivity(`Raccourcir les liens`);
-    bot.user.setStatus('online');
-});
-
-bot.on('disconnect', () => {
-    console.log('Disconnected!');
-})
-    
+loadCommands(bot);
+loadEvents(bot);

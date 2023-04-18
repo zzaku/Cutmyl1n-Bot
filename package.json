@@ -4,12 +4,21 @@
   "description": "bot link shortener",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./index.js"
   },
   "author": "Zakuu",
   "license": "ISC",
   "dependencies": {
+    "@discordjs/rest": "^1.7.0",
+    "axios": "^1.3.5",
+    "bignumber.js": "^9.1.1",
     "discord.js": "^14.9.0",
-    "dotenv": "^16.0.3"
+    "dotenv": "^16.0.3",
+    "fs": "^0.0.1-security",
+    "knex": "^2.4.2",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.22",
+    "valid-url": "^1.0.9"
   }
 }
