@@ -162,7 +162,7 @@ module.exports = {
 
                             } else {
                                 await linkSalon.send({ embeds: [linkEmbed], ephemeral: false, components: [row] });
-                                await bot.function.deleteMessageWithCountdown("reply", message, `**Ton lien à été généré sur ce channel : \<#${linkSalon.id}>**`, 2, "#16a085", true);
+                                await bot.function.deleteMessageWithCountdown("reply", message, `**Ton lien à été généré sur ce channel : \<#${linkSalon.id}>**`, 5, "#16a085", true);
                             }
                             
                         } catch (error) {
