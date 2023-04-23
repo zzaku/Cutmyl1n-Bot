@@ -5,4 +5,4 @@ module.exports = async (db, req, table, body) => {
     } catch (err) {
       throw err;
     }
-  };
+};

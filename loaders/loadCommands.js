@@ -8,6 +8,6 @@ module.exports = async bot => {
         if(!command.name || typeof command.name !== "string") throw new TypeError(`La commande ${file.slice(0, file.length - 3)} n'a pas de nom.`);
 
         bot.commands.set(command.name, command);
-        console.log(`commande ${file} chargée avec succès.`);
+        console.log(`commande /${file.slice(0, file.length - 3)} chargée avec succès.`);
     });
 }

@@ -9,7 +9,7 @@ bot.function = {
     verifyUrl: require('./functions/verifyUrl.js'),
     generateShortLink: require('./functions/generateShortLink.js'),
     getUserSql: require('./functions/getUserSql.js'),
-    getUrlSql: require('./functions/getUrlSql.js'),
+    getExistingUrlSql: require('./functions/getExistingUrlSql.js'),
     getRowsOfAllUrls: require('./functions/getRowsOfAllUrls.js'),
     getAllUrls: require('./functions/getAllUrls.js'),
     addUser: require('./functions/addUser.js'),
@@ -19,6 +19,12 @@ bot.function = {
     getRowWithButtons: require('./functions/getRowWithButtons.js'),
     deleteMessageWithCountdown: require('./functions/deleteMessageWithCountdown.js'),
     sendInteractionReply: require('./functions/sendInteractionReply.js'),
+    getUrlSql: require('./functions/getUrlSql.js'),
+    isWebhookLoaded: require('./functions/isWebhookLoaded.js'),
+    updateWebhook: require('./functions/updateWebhook.js'),
+    loadWebhooks: require('./loaders/loadWebHooks.js'),
+    addWebhook: require('./functions/addWebhook.js'),
+    getWebhook: require('./functions/getWebhook.js'),
 }
 bot.login(process.env.BOT_TOKEN);
 bot.on('disconnect', (err) => {
