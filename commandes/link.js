@@ -21,7 +21,7 @@ module.exports = {
         if(message.user.bot) return;
         
         let link = args.get('url').value;
-        let hostname = link.split('/')[0];
+        let hostname = link;
 
         let shortUrl = bot.function.generateShortLink();
 
@@ -39,6 +39,21 @@ module.exports = {
 
         let channelName = `liens-de-${(message.user.username).toLowerCase()}`;
         let linkSalon = await message.guild.channels.cache.find(channel => channel.name === channelName);
+
+        const linkEmbed = new EmbedBuilder()
+            .setColor("#16a085")
+            .setTitle(hostname)
+            .setURL(`https://cutmyl1nk.fr/${fullyShortenedUrl}`)
+            .setAuthor({ name: 'Cutmyl1nk', iconURL: 'https://cutmyl1nk.fr/inc/assets/logo.png', url: 'https://cutmyl1nk.fr' })
+            .setDescription("Voici le lien raccourci que vous avez demandé :")
+            .addFields(
+                { name: ":globe_with_meridians: Lien original", value: link },
+                { name: ":link: Lien raccourci", value: `https://cutmyl1nk.fr/${fullyShortenedUrl}` },
+                { name: ":scissors: Créer un lien plus court sur le site", value: "[cutmyl1nk.fr](https://cutmyl1nk.fr/)" }
+            )
+            .setImage('https://cutmyl1nk.fr/inc/assets/logo.png')
+            .setTimestamp()
+            .setFooter({text: "\u2705 Lien créé avec succès"});
 
         const row = new ActionRowBuilder()
             .addComponents(
@@ -102,22 +117,7 @@ module.exports = {
                     let isAlreadyshortened = await bot.function.getExistingUrlSql(db, 'COUNT(*) as count', 'discordUrls', getUrlByOriginalUrl, getUrlByShortenedUrl);
 
                     if(!isAlreadyshortened) {
-
-                        const linkEmbed = new EmbedBuilder()
-                        .setColor(0x0099FF)
-                        .setTitle(link)
-                        .setURL(`https://cutmyl1nk.fr/${fullyShortenedUrl}`)
-                        .setAuthor({ name: 'Cutmyl1nk', iconURL: 'https://cutmyl1nk.fr/inc/assets/logo.png', url: 'https://cutmyl1nk.fr' })
-                        .setDescription(`https://cutmyl1nk.fr/${fullyShortenedUrl}`)
-                        .setThumbnail('https://cutmyl1nk.fr/inc/assets/logo.png')
-                        .addFields(
-                            { name: 'Tu peux créer un lien plus court sur', value: 'https://cutmyl1nk.fr' },
-                            { name: '\u200B', value: '\u200B' },
-                            )
-                            .setImage('https://cutmyl1nk.fr/inc/assets/logo.png')
-                            .setTimestamp()
-                            .setFooter({ text: 'made by Zakuu', iconURL: 'https://cutmyl1nk.fr/inc/assets/logo.png' });
-                            
+  
                         try{
                             await bot.function.addUrl(db, 'discordUrls', url);
                             let linkCategory = await message.guild.channels.cache.find(channel => channel.name === 'Vos liens raccourci');
@@ -162,12 +162,12 @@ module.exports = {
                                 await message.reply({ embeds: [linkEmbed], ephemeral: false, components: [row] });
                                 
                             } else {
-                                await linkSalon.send({ embeds: [linkEmbed], ephemeral: false, components: [row] });
+                                await linkSalon.send({ embeds: [linkEmbed], ephemeral: true, components: [row] });
                                 await bot.function.deleteMessageWithCountdown("reply", message, `**Ton lien à été généré sur ce channel : \<#${linkSalon.id}>**`, 3, "#16a085", true);
                             }
                             
                         } catch (error) {
-                            return message.reply({ content: "Il y'a eu un problème d'enregistration, veuillez résaayer plus tard", ephemeral: true });
+                            return message.reply({ content: "Il y'a eu un problème d'enregistrement, veuillez résaayer plus tard", ephemeral: true });
                         }
                     } else {
                         return message.reply({ content: "Vous avez déjà un lien raccourci avec cette URL", ephemeral: true });

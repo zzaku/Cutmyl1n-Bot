@@ -23,6 +23,7 @@ module.exports = {
 
             try {
                 if(!userId) return;
+                
                 if(!message.embeds[0]?.data?.title) return;
 
                 const webhook = await bot.function.getWebhook(db, 'webhook_id', 'webhook', {user_id: userId, original_url: message.embeds[0]?.data?.title});
