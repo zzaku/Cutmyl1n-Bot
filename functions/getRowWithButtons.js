@@ -18,4 +18,4 @@ module.exports = async (shortenedUrl, button) => {
       );
   
     return row;
-  }
+}
